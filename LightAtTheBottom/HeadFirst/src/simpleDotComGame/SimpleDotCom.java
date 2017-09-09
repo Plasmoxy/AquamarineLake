@@ -36,6 +36,25 @@ setLocationCells(int[] cellLocations)
 	assign cell locations parameter to cell locations instance variable
 }
 
+main
+{
+	declare int to hold number of guesses
+	
+	instantiate dotcom object
+	make location for it ->
+	compute random number between 0 and 4 ( starting location cell position)
+	set the location cells to random num, rn+1, rn+2 ( therefore max 6)
+	
+	declare string result so while can scan it
+	while dotcom is still alive  (result!="kill"):
+		get user input from cmdline
+		let dotcom check itself directly form user input as it has parse
+		-> assign return value to result
+	
+	print how many guesses user had
+	
+}
+
 */
 
 public class SimpleDotCom
