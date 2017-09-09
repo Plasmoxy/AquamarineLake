@@ -41,17 +41,20 @@ main
 	declare int to hold number of guesses
 	
 	instantiate dotcom object
-	make location for it ->
 	compute random number between 0 and 4 ( starting location cell position)
-	set the location cells to random num, rn+1, rn+2 ( therefore max 6)
+	make location for it -> create array n,n+1,n+2
+	set the location cells of instance to the array
 	
-	declare string result so while can scan it
-	while dotcom is still alive  (result!="kill"):
+	declare boolean isAlive so while can scan it
+	while dotcom is still alive :
 		get user input from cmdline
 		let dotcom check itself directly form user input as it has parse
-		-> assign return value to result
-	
-	print how many guesses user had
+		-> pass it to if
+		// it will automatically printout what happened and assign it to its inst
+		// variables so therefore we'll just check for the kill
+		if result is "kill" :
+			set isAlive to false so we break out of the loop
+			print the number of guesses
 	
 }
 
