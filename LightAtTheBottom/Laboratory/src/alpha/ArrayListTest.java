@@ -9,6 +9,9 @@ public class ArrayListTest
 	public static void main(String[] args)
 	{
 		
+		// measuring nanotime
+		long nanotime = System.nanoTime();
+		
 		// create trash arraylist for anything that you want
 		ArrayList trash = new ArrayList(); // same as ArrayList<Object>
 		
@@ -51,6 +54,9 @@ public class ArrayListTest
 		
 		System.out.println(" Unsorted junk -------------------- \n");
 		for (Object o : unsorted) System.out.println(o.toString());
+		
+		nanotime = System.nanoTime() - nanotime;
+		System.out.println("\n\n --- nanotime -> " + Long.toString(nanotime) + " ns --- " + Double.toString(nanotime/(Math.pow(10, 9))) + " seconds --- ");
 		
 	}
 	
