@@ -1,5 +1,7 @@
 package simpleDotComGame;
 
+import java.util.Arrays;
+
 /*
  * This class was written using Extreme Programming methodology
  * ( has test class, pseudo and all that stuff )
@@ -76,12 +78,13 @@ public class SimpleDotCom
 		int guess = Integer.parseInt(stringGuess);
 		String result = "miss"; // default
 		
-		for (int cell : locationCells) // hit scanner
+		for (int i = 0; i < locationCells.length; i++) // hit scanner
 		{
-			if ( guess == cell)
+			if ( guess == locationCells[i])
 			{
 				result = "hit";
 				numOfHits++;
+				locationCells[i] = -1;
 				break; // get out of the loop, no need to test other cells
 			}
 		}
@@ -106,11 +109,13 @@ public class SimpleDotCom
 		
 		int randomNum = (int) ( Math.random() * 5);
 		int[] locations = {randomNum, randomNum+1, randomNum+2};
+		
 		theDotCom.setLocationCells(locations);
 		boolean isAlive = true;
 		
-		while (isAlive == true)
+		while (isAlive)
 		{
+			System.out.println(Arrays.toString(locations));
 			String guess = helper.getUserInput("Enter a number");
 			String result = theDotCom.checkYourself(guess);
 			numOfGuesses++;
