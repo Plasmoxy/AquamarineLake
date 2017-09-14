@@ -33,9 +33,12 @@ public class ArrayListTest
 		// sort dogs and cats from trash to their own lists
 		for (Object i : trash)
 		{
-				 if ( i instanceof Dog) dogs.add((Dog)i);
-			else if ( i instanceof Cat) cats.add((Cat)i);
-			else 						unsorted.add(i);
+			if ( i instanceof Dog)
+				dogs.add((Dog)i);
+			else if ( i instanceof Cat)
+				cats.add((Cat)i);
+			else
+				unsorted.add(i);
 		}
 		
 		// print dogs and cats simultaneously and also unsorted stuff
