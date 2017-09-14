@@ -16,10 +16,11 @@ public class ArrayListTest
 		ArrayList<Dog> dogs = new ArrayList<Dog>();
 		ArrayList<Cat> cats = new ArrayList<Cat>();
 		
-		// add some dogs and cats to trash
+		// add some dogs and cats to trash and also some junk
 		trash.addAll(Arrays.asList(
-			new Dog(1), new Dog(3), new Cat(4), new Cat(5),
-			new Dog(3), new Cat(6), new Dog(9), new Dog(5)
+			new Dog(1), new Dog(3), "TF", new Cat(4), new Cat(5),
+			new Dog(3), new Cat(6), new Dog(9), new Dog(5), "XDDD",
+			false, true, "lmao", 232429, 69, 2f
 		));
 		
 		
