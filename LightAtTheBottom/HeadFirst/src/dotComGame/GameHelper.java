@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.*;
 public class GameHelper {
 	
-	private static final boolean cheats = false;
+	private static final boolean cheats = true;
 	
  private static final String alphabet = "abcdefg";
  private int gridLength = 7;
