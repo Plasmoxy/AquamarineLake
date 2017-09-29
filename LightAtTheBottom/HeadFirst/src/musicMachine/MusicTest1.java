@@ -20,7 +20,7 @@ public class MusicTest1 {
 			Track track = seq.createTrack();
 			
 			int j = 1;
-			for ( int i = 20; i<=100; i+=2)
+			for ( int i = 20; i<=100; i+=1)
 			{
 				ShortMessage a = new ShortMessage();
 				a.setMessage(144,1,i,100);
