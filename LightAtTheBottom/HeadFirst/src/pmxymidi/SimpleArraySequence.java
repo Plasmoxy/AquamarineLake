@@ -1,4 +1,4 @@
-package midiPlayerAndParser;
+package pmxymidi;
 
 
 /*
@@ -19,13 +19,13 @@ public class SimpleArraySequence extends Sequence
 	
 	public ArrayList<Track> tracks;
 	
-	private int noteOnLength = 4;
-	private int velocity = 100;
-	private int channel = 1;
-	private final int noteOnMidiMessage = 144;
-	private final int noteOffMidiMessage = 128;
+	private static final int defaultNoteDuration = 1;
+	private static final int defaultVelocity = 100;
+	private static final int defaultChannel = 1;
+	private static final int noteOnMidiMessage = 144;
+	private static final int noteOffMidiMessage = 128;
 	
-	public SimpleArraySequence(int[][] notes) throws InvalidMidiDataException
+	public SimpleArraySequence(int[][] notes, int noteDuration, int velocity, int channel) throws InvalidMidiDataException
 	{
 		super(PPQ, 4);
 		
@@ -47,7 +47,7 @@ public class SimpleArraySequence extends Sequence
 				noteoffmsg.setMessage(noteOffMidiMessage, channel, trackNotes[notei], velocity);
 				
 				MidiEvent noteon = new MidiEvent(noteonmsg, notei);
-				MidiEvent noteoff = new MidiEvent(noteoffmsg, notei+noteOnLength);
+				MidiEvent noteoff = new MidiEvent(noteoffmsg, notei+noteDuration);
 				
 				track.add(noteon);
 				track.add(noteoff);
@@ -57,26 +57,21 @@ public class SimpleArraySequence extends Sequence
 		
 	}
 	
+	public SimpleArraySequence(int[][] notes) throws InvalidMidiDataException
+	{
+		this(notes, defaultNoteDuration, defaultVelocity, defaultChannel);
+	}
+	
 	public SimpleArraySequence(int[][] notes, int noteDuration) throws InvalidMidiDataException
 	{
-		this(notes);
-		this.noteOnLength = noteDuration;
+		this(notes, noteDuration, defaultVelocity, defaultChannel);
 	}
 	
 	public SimpleArraySequence(int[][] notes, int noteDuration, int velocity) throws InvalidMidiDataException
 	{
-		this(notes);
-		this.noteOnLength = noteDuration;
-		this.velocity = velocity;
+		this(notes, noteDuration, velocity, defaultChannel);
 	}
 	
-	public SimpleArraySequence(int[][] notes, int noteDuration, int velocity, int channel) throws InvalidMidiDataException
-	{
-		this(notes);
-		this.noteOnLength = noteDuration;
-		this.velocity = velocity;
-		this.channel = channel;
-	}
 	
 
 }

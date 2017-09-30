@@ -1,4 +1,4 @@
-package midiPlayerAndParser;
+package pmxymidi;
 
 import java.util.Arrays;
 
@@ -38,6 +38,7 @@ public class NoteParser
 		case 'G' : noteNum = 7 ;break;
 		case 'A' : noteNum = 9 ;break;
 		case 'B' : noteNum = 11 ;break;
+		case '-' : return -1 ;
 		default :
 			throw new NoteParseException();
 		}
@@ -107,7 +108,7 @@ public class NoteParser
 			}
 			
 		} catch(Exception e) {
-			System.out.println("NoteParser catched exception : ");
+			System.out.println("NoteParser caught an exception : ");
 			e.printStackTrace();
 			throw new NoteParseException();
 		}

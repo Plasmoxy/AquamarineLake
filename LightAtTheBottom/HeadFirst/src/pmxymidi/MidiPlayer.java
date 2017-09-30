@@ -1,4 +1,4 @@
-package midiPlayerAndParser;
+package pmxymidi;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;

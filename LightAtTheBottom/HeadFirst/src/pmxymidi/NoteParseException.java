@@ -1,4 +1,4 @@
-package midiPlayerAndParser;
+package pmxymidi;
 
 public class NoteParseException extends Exception
 {
