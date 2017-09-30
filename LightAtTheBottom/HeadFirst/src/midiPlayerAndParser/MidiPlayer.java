@@ -1,4 +1,4 @@
-package shepardTone;
+package midiPlayerAndParser;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;

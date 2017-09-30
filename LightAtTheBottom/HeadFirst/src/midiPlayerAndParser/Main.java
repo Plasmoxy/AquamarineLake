@@ -1,4 +1,4 @@
-package shepardTone;
+package midiPlayerAndParser;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Shepard
+public class Main
 {
 	
 	static String readFile(String path) throws IOException 

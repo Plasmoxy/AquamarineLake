@@ -1,4 +1,4 @@
-package shepardTone;
+package midiPlayerAndParser;
 
 import java.util.Arrays;
 

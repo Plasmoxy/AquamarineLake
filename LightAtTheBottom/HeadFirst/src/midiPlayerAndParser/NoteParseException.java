@@ -1,4 +1,4 @@
-package shepardTone;
+package midiPlayerAndParser;
 
 public class NoteParseException extends Exception
 {
