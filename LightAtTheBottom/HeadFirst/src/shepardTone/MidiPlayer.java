@@ -25,40 +25,45 @@ public class MidiPlayer
 	
 	private final int finishDelay = 3000;
 	
-	public MidiPlayer(Sequence constr_seq, float constr_tempo)
-	throws MidiUnavailableException, InvalidMidiDataException
-	{
+	public MidiPlayer(Sequence constr_seq, float constr_tempo) throws MidiUnavailableException, InvalidMidiDataException {
+		
 		seq = constr_seq;
 		tempo = constr_tempo;
 		
 		sqcr = MidiSystem.getSequencer();
 		
 		sqcr.setSequence(seq);
-		sqcr.setTempoInBPM(tempo);
 		
 		sqcr.addMetaEventListener(new MetaEventListener() {
 
             @Override
             public void meta(MetaMessage metaMsg) {
                 if (metaMsg.getType() == 0x2F) {
-                	try {Thread.sleep(finishDelay);}catch(Exception e) {}
+                	try {Thread.sleep(finishDelay);}catch(InterruptedException e) {}
                     sqcr.close();
                 }
             }
         });
 		
+		sqcr.open();
+		
+		// need thread sleep because it takes tame to initialize, otherwise it sounds weird
+		try { Thread.sleep(100); } catch(InterruptedException e) {}
+		
 	}
 	
-	public void play()
-	throws MidiUnavailableException
-	{
-		sqcr.open();
+	public void play() throws MidiUnavailableException {
+		sqcr.setTempoInBPM(tempo);
 		sqcr.start();
 	}
 	
-	public void stop()
-	{
+	public void stop() {
 		sqcr.stop();
+	}
+	
+	public void setTempo(float bpm)
+	{
+		sqcr.setTempoInBPM(bpm);
 	}
 
 }

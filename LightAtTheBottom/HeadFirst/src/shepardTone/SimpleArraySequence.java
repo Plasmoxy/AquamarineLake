@@ -19,7 +19,7 @@ public class SimpleArraySequence extends Sequence
 	
 	public ArrayList<Track> tracks;
 	
-	private int noteOnTicks = 4;
+	private int noteOnLength = 4;
 	private int velocity = 100;
 	private int channel = 1;
 	private final int noteOnMidiMessage = 144;
@@ -34,6 +34,7 @@ public class SimpleArraySequence extends Sequence
 		for (int[] trackNotes : notes)
 		{
 			Track track = createTrack();
+			tracks.add(track);
 			
 			// notei = current note index
 			for (int notei = 0; notei < trackNotes.length ; notei++)
@@ -46,7 +47,7 @@ public class SimpleArraySequence extends Sequence
 				noteoffmsg.setMessage(noteOffMidiMessage, channel, trackNotes[notei], velocity);
 				
 				MidiEvent noteon = new MidiEvent(noteonmsg, notei);
-				MidiEvent noteoff = new MidiEvent(noteoffmsg, notei+noteOnTicks);
+				MidiEvent noteoff = new MidiEvent(noteoffmsg, notei+noteOnLength);
 				
 				track.add(noteon);
 				track.add(noteoff);
@@ -55,5 +56,27 @@ public class SimpleArraySequence extends Sequence
 		}
 		
 	}
+	
+	public SimpleArraySequence(int[][] notes, int noteDuration) throws InvalidMidiDataException
+	{
+		this(notes);
+		this.noteOnLength = noteDuration;
+	}
+	
+	public SimpleArraySequence(int[][] notes, int noteDuration, int velocity) throws InvalidMidiDataException
+	{
+		this(notes);
+		this.noteOnLength = noteDuration;
+		this.velocity = velocity;
+	}
+	
+	public SimpleArraySequence(int[][] notes, int noteDuration, int velocity, int channel) throws InvalidMidiDataException
+	{
+		this(notes);
+		this.noteOnLength = noteDuration;
+		this.velocity = velocity;
+		this.channel = channel;
+	}
+	
 
 }
