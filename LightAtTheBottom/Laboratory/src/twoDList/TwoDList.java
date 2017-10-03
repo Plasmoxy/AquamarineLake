@@ -23,7 +23,14 @@ public class TwoDList
 		}
 		
 		
-		System.out.println(a.get(0).get(0));
+		for (List<String> l : a)
+		{
+			for (String s : l)
+			{
+				System.out.println(s);
+				
+			}
+		}
 			
 		
 		
