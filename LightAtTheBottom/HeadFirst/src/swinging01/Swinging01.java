@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Swinging01
 implements ActionListener
@@ -15,8 +16,15 @@ implements ActionListener
 	
 	public Swinging01()
 	{
-		try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-		catch (Exception e) {e.printStackTrace();}
+		MaterialLookAndFeel ui = new MaterialLookAndFeel (GUITheme.LIGHT_THEME);
+	    
+	    try {
+	     UIManager.setLookAndFeel (ui.getName ());
+	     }
+	     catch (UnsupportedLookAndFeelException e) {}
+	     catch (ClassNotFoundException e) {}
+	     catch (InstantiationException e) {}
+	     catch (IllegalAccessException e) {}
 		
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
