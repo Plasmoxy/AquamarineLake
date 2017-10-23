@@ -10,6 +10,8 @@ import org.opencv.videoio.Videoio;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,12 +22,11 @@ public class MainFrame extends JFrame {
 
     public volatile DrawPanel p;
 
-    static { System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
-
     public MainFrame()
     {
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        setTitle("OPENCV3.3.0 AHAHAHAH by Plasmoxy");
 
         setPreferredSize(new Dimension(640, 480));
 
@@ -37,7 +38,21 @@ public class MainFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 cap.release();
+                System.out.println("Successfully closed the MainFrame.");
                 System.exit(0);
+            }
+        });
+
+        addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                super.keyPressed(e);
+                if (e.getKeyChar() == 'q' || e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                {
+                    closeWindow();
+                }
             }
         });
 
@@ -53,27 +68,30 @@ public class MainFrame extends JFrame {
     {//ll
         cap.read(frame);
 
-        Imgproc.rectangle(frame, new Rect(0, 0, 100, 100), hsvBgrScalar(iLowH, iLowS, iLowV), -1);
-        Imgproc.rectangle(frame, new Rect(100, 0, 100, 100), hsvBgrScalar(iHighH, iHighS, iHighV), -1);
-
-        Imgproc.rectangle(frame, Rect(0,100,100,100), hsvBgrScalar(iLowH, 255, 255), -1);
-        Imgproc.rectangle(frame, Rect(100,100,100,100), hsvBgrScalar(iHighH, 255, 255), -1);
-
-        Imgproc.putText(frame, "MIN", new Point(0, 20), CV_FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255), 1);
-        Imgproc.putText(frame, "MAX", Point(100, 20), CV_FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255), 1);
-
-        Imgproc.putText(frame, "MIN_HUE", Point(0, 120), CV_FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255), 1);
-        Imgproc.putText(frame, "MAX_HUE", Point(100, 120), CV_FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255), 1);
+        Imgproc.rectangle(frame, new Point(50, 50), new Point(100, 100), new Scalar(0,0,255), -1);
 
         p.setFrame(frame);
         p.repaint();
     }
 
     public Scalar hsvBgrScalar(double H, double S, double V) {
-        Mat rgb;
-        Mat hsv(1, 1, CvType.CV_8UC3, new Scalar(H, S, V));
-        Imgproc.cvtColor(hsv, rgb, Imgproc.CV_HSV2BGR);
-        return Scalar(rgb.data[0], rgb.data[1], rgb.data[2]);
+        Mat rgb = new Mat();
+        Mat hsv = new Mat(1, 1, CvType.CV_8UC3, new Scalar(H, S, V));
+
+        Imgproc.cvtColor(hsv, rgb, Imgproc.COLOR_HSV2BGR);
+
+        int size = (int) (rgb.total() * rgb.channels());
+
+        byte[] data = new byte[size];
+
+        rgb.get(0,0,data);
+
+        return new Scalar(data[0], data[1], data[2]);
+    }
+
+    public void closeWindow()
+    {
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
 }

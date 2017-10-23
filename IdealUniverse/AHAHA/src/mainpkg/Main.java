@@ -1,9 +1,11 @@
 package mainpkg;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 public class Main
 {
+    static { System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
 
     public static volatile MainFrame window;
 
@@ -12,15 +14,33 @@ public class Main
     {
         window = new MainFrame();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true)
-                {
-                    window.updateFrame();
-                }
+
+        System.out.println("Starting render control thread.");
+
+        Runnable fpsTest = () -> {
+            long stamp = 0;
+            for(int i = 0;i < 10; i++)
+            {
+                stamp = System.nanoTime();
+                window.updateFrame();
+                System.out.println( ( Math.pow(10,9)/( System.nanoTime()-stamp)  ) );
+
             }
-        }).start();
+            System.out.println(" FINISHED THREAD NOW CLOSING ");
+            window.closeWindow();
+        };
+
+        Runnable render = () -> {
+            for(;;)
+            {
+                window.updateFrame();
+            }
+        };
+
+        Thread mainRenderer = new Thread(render);
+
+        mainRenderer.start();
+
     }
 
 }
