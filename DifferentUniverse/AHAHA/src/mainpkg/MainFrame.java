@@ -36,6 +36,8 @@ public class MainFrame extends JFrame {
         p = new DrawPanel();
         add(p);
 
+        pack();
+
         setVisible(true);
     }
 
@@ -51,6 +53,7 @@ public class MainFrame extends JFrame {
                 while (true)
                 {
                     window.cap.read(frame);
+                    window.p.setFrame(frame);
                     window.p.repaint();
                 }
             }
