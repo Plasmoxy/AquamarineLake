@@ -12,7 +12,7 @@ public class ChaosGUI extends JFrame
     public DrawPanel dpanel;
     public final int BALLSIZE = 30;
 
-    public static final Color bgColor = new Color(58,58,58);
+    public static final Color bgColor = new Color(10,10,10);
     public static final Color ballColor = new Color(28, 255, 213);
 
     public Random rnd;
