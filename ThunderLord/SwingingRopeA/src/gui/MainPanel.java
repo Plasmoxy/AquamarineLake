@@ -13,7 +13,6 @@ public class MainPanel extends JPanel
     {
         super(new BorderLayout());
         setPreferredSize(new Dimension(400, 300));
-        
         setBackground(Color.red);
         
         //--
