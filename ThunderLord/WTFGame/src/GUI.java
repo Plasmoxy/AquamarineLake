@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
 public class GUI extends JFrame
 {
@@ -12,6 +14,7 @@ public class GUI extends JFrame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        hideDPCursor();
         
         add(dp);
         pack();
@@ -33,6 +36,12 @@ public class GUI extends JFrame
 
     }
     
+    public void hideDPCursor()
+    {
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = getToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+        dp.setCursor(blankCursor);
+    }
     public void closeWindow()
     {
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
