@@ -11,11 +11,8 @@ import java.awt.*;
 
 public class DrawPanel extends JPanel
 {
-<<<<<<< HEAD
     public volatile Mat frame = new Mat();
     public volatile VideoCapture cap = new VideoCapture(0);
-=======
->>>>>>> 29e1ffabe1341ffe85781355bd224ec1cd67e65d
     
     public DrawPanel()
     {
