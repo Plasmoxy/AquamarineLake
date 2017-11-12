@@ -1,6 +1,9 @@
 package plasmoxycvutil;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,4 +28,15 @@ public class CVUtility
         return image;
         
     }
+    
+    public static Scalar hsvToBgrScalar(Scalar hsvin)
+    {
+        Mat bgr = new Mat();
+        Mat hsv = new Mat(1, 1, CvType.CV_8UC3, hsvin);
+        Imgproc.cvtColor(hsv, bgr, Imgproc.COLOR_HSV2BGR);
+        byte[] bgr_data = new byte[(int)(bgr.total() * bgr.channels())];
+        bgr.get(0,0, bgr_data);
+        return new Scalar(bgr_data[0], bgr_data[1], bgr_data[2]);
+    }
+    
 }
