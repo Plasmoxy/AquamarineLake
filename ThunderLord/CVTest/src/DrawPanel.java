@@ -1,9 +1,13 @@
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 import plasmoxycvutil.CVUtility;
 
 import javax.swing.*;
 import java.awt.*;
+
 
 public class DrawPanel extends JPanel
 {
@@ -26,7 +30,7 @@ public class DrawPanel extends JPanel
     {
         cap.read(frame);
         
-        
+        Imgproc.rectangle(frame, new Point(0,0), new Point(50,50), new Scalar(255, 0, 0), -1);
         
         repaint();
     }
