@@ -58,6 +58,8 @@ public class MainFrame extends JFrame {
 
         p = new DrawPanel();
         add(p);
+        
+        p.setFrame(frame);
 
         pack();
 
@@ -65,12 +67,9 @@ public class MainFrame extends JFrame {
     }
 
     public void updateFrame()
-    {//ll
+    {
         cap.read(frame);
-
         Imgproc.rectangle(frame, new Point(50, 50), new Point(100, 100), new Scalar(0,0,255), -1);
-
-        p.setFrame(frame);
         p.repaint();
     }
 
