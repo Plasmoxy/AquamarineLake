@@ -12,6 +12,7 @@ public class GUI extends JFrame
     public GUI()
     {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Plasmoxy-EpilepticBall");
         setUndecorated(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         hideDPCursor();
