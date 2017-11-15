@@ -7,11 +7,12 @@ public class Main
     
     public static volatile GUI window = new GUI();
     public static volatile Thread mainRenderer;
+    public static volatile boolean renderingActive = true;
 
     public static void main(String[] args)
     {
         Runnable render = () -> {
-            for (;;)
+            while (renderingActive)
             {
                 window.dp.refresh();
             }
