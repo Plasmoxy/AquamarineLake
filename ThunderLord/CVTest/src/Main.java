@@ -1,5 +1,7 @@
 import org.opencv.core.Core;
 
+import java.util.function.Function;
+
 public class Main
 {
     
