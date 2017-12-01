@@ -1,23 +1,29 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main // uses singleton pattern
+{
+    
+    private static Main instance;
+    private Main() {} // block instantiation
+    static { instance = new Main(); } // instantiate singleton object
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+    public static Main getInstance()
+    {
+        return instance;
     }
-
-
-    public static void main(String[] args) {
-        launch(args);
+    
+    private Stage stage;
+    private Application app;
+    public void init(Application a, Stage s)
+    {
+        stage = s;
+        app = a;
     }
+    
+    public Printer prnt = new Printer();
+    
+    
 }
