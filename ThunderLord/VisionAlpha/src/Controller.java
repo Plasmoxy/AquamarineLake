@@ -1,12 +1,22 @@
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -37,6 +47,9 @@ public class Controller implements Initializable
     @FXML private ImageView currentFrame;
     @FXML private BorderPane root;
     @FXML private Button colorButton;
+    @FXML private JFXTextField colorText;
+    @FXML private Canvas colorShow;
+    @FXML private JFXToggleButton weirdToggle;
     
     private App app;
 
@@ -50,6 +63,8 @@ public class Controller implements Initializable
     private static int cameraId = 0;
     
     private double[] midPoint;
+    
+    private boolean weirdRenderActive = false;
 
     BooleanProperty isImgVisible = new SimpleBooleanProperty(true);
     
@@ -57,9 +72,18 @@ public class Controller implements Initializable
     protected void updateColor(ActionEvent ev)
     {
         try {
-            colorButton.setStyle("-fx-background-color: " + String.format("#%02x%02x%02x", (int) midPoint[0], (int)midPoint[1], (int)midPoint[2]) + ";");
+            String hex =  String.format("#%02x%02x%02x", (int) midPoint[0], (int)midPoint[1], (int)midPoint[2]);
+            colorText.setText(hex);
+            colorButton.setStyle("-fx-background-color: " + hex + ";");
         } catch(Exception ex) {ex.printStackTrace();}
         
+    }
+    
+    @FXML
+    protected void weirdToggleAction(ActionEvent ev)
+    {
+        System.out.println(33);
+        weirdRenderActive = weirdToggle.isSelected();
     }
     
 
@@ -73,7 +97,11 @@ public class Controller implements Initializable
     protected void startCamera(ActionEvent event)
     {
         
+        colorButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        
         app.st.sizeToScene();
+        colorText.setFont(new Font("Symbol", 25.0));
+        colorText.setText("");
         
         if (!this.cameraActive)
         {
@@ -97,6 +125,10 @@ public class Controller implements Initializable
                         Image imageToShow = Utils.mat2Image(frame);
                         updateImageView(currentFrame, imageToShow);
                         
+                        GraphicsContext g = colorShow.getGraphicsContext2D();
+                        
+                        g.setFill(Color.rgb((int) midPoint[0], (int)midPoint[1], (int)midPoint[2]));
+                        g.fillRect(0, 0, colorShow.getWidth(), colorShow.getHeight());
                     }
                 };
 
@@ -221,16 +253,20 @@ public class Controller implements Initializable
     
     private void process(Mat f)
     {
-        Mat rgb = new Mat();
-        Imgproc.cvtColor(f, rgb, Imgproc.COLOR_BGR2RGB);
+        Mat gen = new Mat();
         
-        Point mid = new Point(rgb.size().width/2, rgb.size().height/2);
+        Imgproc.cvtColor(f, gen, Imgproc.COLOR_BGR2RGB);
         
-        midPoint = rgb.get((int)mid.y, (int)mid.x);
+        if (weirdRenderActive) Imgproc.cvtColor(gen, gen, Imgproc.COLOR_HSV2RGB);
         
-        Imgproc.circle(rgb, mid, 5, new Scalar(255, 0, 0));
+        Point mid = new Point(gen.size().width/2, gen.size().height/2);
         
-        Imgproc.cvtColor(rgb, f, Imgproc.COLOR_RGB2BGR);
+        midPoint = gen.get((int)mid.y, (int)mid.x);
+        
+        Imgproc.circle(gen, mid, 5, new Scalar(255-(int)(midPoint[0]), 255-(int)(midPoint[1]), 255-(int)(midPoint[2])), 2);
+
+        Imgproc.cvtColor(gen, f, Imgproc.COLOR_RGB2BGR);
+        
     }
 
 }

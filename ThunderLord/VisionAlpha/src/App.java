@@ -35,6 +35,7 @@ public class App extends Application
         s.setMinHeight(600);
         s.setScene(sc);
         s.setTitle("ThunderLord/VisionAlpha");
+        s.setResizable(false);
         s.sizeToScene();
         s.show();
 
