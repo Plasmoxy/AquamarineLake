@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <top>
@@ -13,11 +16,26 @@
    <bottom>
       <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="cambtn" onAction="#startCamera" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #ddd;" text="Start Camera">
+            <JFXButton fx:id="cambtn" onAction="#startCamera" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #ddd;" text="Start Camera">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="MS Gothic" size="19.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <FlowPane.margin>
+                  <Insets right="10.0" />
+               </FlowPane.margin>
             </JFXButton>
+            <JFXButton fx:id="colorButton" contentDisplay="GRAPHIC_ONLY" onAction="#updateColor" prefHeight="61.0" prefWidth="175.0" style="-fx-background-color: #aaf;" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;- Clicc to detecc " textAlignment="CENTER" wrappingWidth="160.80343627929688">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+            </Text>
          </children>
       </FlowPane>
    </bottom>

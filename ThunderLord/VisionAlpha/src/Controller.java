@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
@@ -31,14 +33,10 @@ import java.util.concurrent.TimeUnit;
 public class Controller implements Initializable
 {
     // the FXML button
-    @FXML
-    private Button cambtn;
-    // the FXML image view
-    @FXML
-    private ImageView currentFrame;
-    
-    @FXML
-    private BorderPane root;
+    @FXML private Button cambtn;
+    @FXML private ImageView currentFrame;
+    @FXML private BorderPane root;
+    @FXML private Button colorButton;
     
     private App app;
 
@@ -50,12 +48,17 @@ public class Controller implements Initializable
     private boolean cameraActive = false;
     // the id of the camera to be used
     private static int cameraId = 0;
+    
+    private double[] midPoint;
 
     BooleanProperty isImgVisible = new SimpleBooleanProperty(true);
     
     @FXML
-    protected void setConvert(ActionEvent e)
+    protected void updateColor(ActionEvent ev)
     {
+        try {
+            colorButton.setStyle("-fx-background-color: " + String.format("#%02x%02x%02x", (int) midPoint[0], (int)midPoint[1], (int)midPoint[2]) + ";");
+        } catch(Exception ex) {ex.printStackTrace();}
         
     }
     
@@ -69,6 +72,8 @@ public class Controller implements Initializable
     @FXML
     protected void startCamera(ActionEvent event)
     {
+        
+        app.st.sizeToScene();
         
         if (!this.cameraActive)
         {
@@ -91,6 +96,7 @@ public class Controller implements Initializable
                         // convert and show the frame
                         Image imageToShow = Utils.mat2Image(frame);
                         updateImageView(currentFrame, imageToShow);
+                        
                     }
                 };
 
@@ -215,7 +221,16 @@ public class Controller implements Initializable
     
     private void process(Mat f)
     {
-        Imgproc.cvtColor(f, f, Imgproc.COLOR_HSV2BGR);
+        Mat rgb = new Mat();
+        Imgproc.cvtColor(f, rgb, Imgproc.COLOR_BGR2RGB);
+        
+        Point mid = new Point(rgb.size().width/2, rgb.size().height/2);
+        
+        midPoint = rgb.get((int)mid.y, (int)mid.x);
+        
+        Imgproc.circle(rgb, mid, 5, new Scalar(255, 0, 0));
+        
+        Imgproc.cvtColor(rgb, f, Imgproc.COLOR_RGB2BGR);
     }
 
 }
