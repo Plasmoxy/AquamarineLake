@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 
-
-<BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <top>
+      <ImageView fx:id="currentFrame" fitHeight="524.0" fitWidth="583.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
    <bottom>
-      <JFXButton fx:id="cambtn" onAction="#startCamera" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #ddd;" text="Start Camera" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="15.0" />
-         </BorderPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
+      <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="cambtn" onAction="#startCamera" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #ddd;" text="Start Camera">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </FlowPane>
    </bottom>
-   <center>
-      <ImageView fx:id="currentFrame" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>

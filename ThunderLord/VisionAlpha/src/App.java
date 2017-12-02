@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +17,20 @@ public class App extends Application
     
     static { System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
     
+    public FXMLLoader loader;
+    public BorderPane root;
+    public Controller contr;
+    public Scene sc;
+    
     @Override
     public void start(Stage s) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui.fxml"));
-        BorderPane root = (BorderPane) loader.load();
-        Controller contr = loader.getController();
+        loader = new FXMLLoader(getClass().getResource("gui.fxml"));
+        root = (BorderPane) loader.load();
+        contr = loader.getController();
+        contr.link(this);
         
-        Scene sc = new Scene(root, 600, 400);
+        sc = new Scene(root, 600 ,600);
         s.setScene(sc);
         s.setTitle("ThunderLord/VisionAlpha");
         s.setResizable(false);
@@ -33,7 +40,8 @@ public class App extends Application
         s.setOnCloseRequest((new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we)
             {
-                
+                System.out.println("CLOSING");
+                contr.setClosed();
             }
         }));
         
@@ -42,6 +50,7 @@ public class App extends Application
     public static void main(String[] args)
     {
         launch(args);
+        System.out.println("EXIT");
     }
     
 }
