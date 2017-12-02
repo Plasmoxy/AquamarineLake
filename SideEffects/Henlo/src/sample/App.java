@@ -18,12 +18,16 @@ public class App extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
         System.out.println("INITIALIZED");
         //------
+
+        
+        
         
         m.init(this, primaryStage);
-        
+        m.go();
     }
     
     @Override

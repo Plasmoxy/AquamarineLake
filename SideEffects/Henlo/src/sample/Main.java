@@ -1,6 +1,8 @@
 package sample;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 public class Main // uses singleton pattern
@@ -24,6 +26,11 @@ public class Main // uses singleton pattern
     }
     
     public Printer prnt = new Printer();
+    
+    public void go()
+    {
+        prnt.print();
+    }
     
     
 }
