@@ -8,6 +8,7 @@ import org.opencv.videoio.VideoCapture;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,7 @@ public class Controller implements Initializable
     
     private VideoCapture cap = new VideoCapture();
     private boolean cameraActive = false;
-    private static int cameraId = 0;
+    private static int cameraId = 1;
 
     private ScheduledExecutorService timer;
     private Runnable frameGrabber = () -> {
@@ -41,8 +42,18 @@ public class Controller implements Initializable
             if (cap.isOpened())
             {
                 cameraActive = true;
+                timer = Executors.newSingleThreadScheduledExecutor();
+                timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
                 
+                cameraButton.setText("Stop Camera");
+            } else {
+                System.err.println("Cant open camera");
+                cameraButton.setText("ERROR");
             }
+        } else {
+            cameraActive = false;
+            cameraButton.setText("Start Camera");
+            stopAcquisition();
         }
     }
     
@@ -50,7 +61,7 @@ public class Controller implements Initializable
     private Mat grabFrame()
     {
         Mat frame = new Mat(); // empty mat
-        if (!cap.isOpened())
+        if (cap.isOpened())
         {
             try
             {
@@ -76,6 +87,8 @@ public class Controller implements Initializable
                 timer.awaitTermination(33, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {e.printStackTrace();}
         }
+        
+        if (cap.isOpened()) cap.release();
     }
     
     private void process(Mat f)

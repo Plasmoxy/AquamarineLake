@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.opencv.core.Core;
 
 import java.io.IOException;
 
@@ -30,25 +31,22 @@ public class App extends Application
         stg.setMinWidth(stg.getWidth());
         stg.show();
         
-        stg.setOnCloseRequest(new EventHandler<WindowEvent>()
+        stg.setOnCloseRequest( event ->
         {
-            @Override
-            public void handle(WindowEvent event)
-            {
-                System.out.println("CLOSING");
-                contr.close();
-            }
+            System.out.println("CLOSING");
+            contr.close();
         });
         
     }
 
     public void stop()
     {
-        System.out.println("STOPP");
+        System.out.println("STOP");
     }
 
     public static void main(String[] args)
     {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         launch(args);
     }
 }

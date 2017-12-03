@@ -34,7 +34,6 @@ public final class CVUtility
         }
         catch (Exception e)
         {
-            System.err.println("Cannot convert the Mat obejct: " + e);
             return null;
         }
     }
