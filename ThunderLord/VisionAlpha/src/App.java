@@ -30,13 +30,13 @@ public class App extends Application
         
         sc = new Scene(root);
         
-        s.setMinWidth(650);
-        s.setMinHeight(680);
         s.setScene(sc);
         s.setTitle("Plasmoxy::ThunderLord - VisionAlpha | by Sebo Petrík");
         s.setResizable(true);
         s.sizeToScene();
         s.show();
+        s.setMinHeight(s.getHeight());
+        s.setMinWidth(s.getWidth());
 
         s.setOnCloseRequest((new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we)
