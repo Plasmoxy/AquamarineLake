@@ -2,7 +2,6 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -29,20 +28,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * The controller for our application, where the application logic is
- * implemented. It handles the button for starting/stopping the camera and the
- * acquired video stream.
- *
- * @author <a href="mailto:luigi.derussis@polito.it">Luigi De Russis</a>
- * @author <a href="http://max-z.de">Maximilian Zuleger</a> (minor fixes)
- * @version 2.0 (2016-09-17)
- * @since 1.0 (2013-10-20)
- *
- */
+
 public class Controller implements Initializable
 {
-    // the FXML button
+    
     @FXML private Button cambtn;
     @FXML private ImageView currentFrame;
     @FXML private BorderPane root;
@@ -50,6 +39,7 @@ public class Controller implements Initializable
     @FXML private JFXTextField colorText;
     @FXML private Canvas colorShow;
     @FXML private JFXToggleButton weirdToggle;
+    @FXML private Text cameraIDText;
     
     private App app;
 
@@ -60,11 +50,12 @@ public class Controller implements Initializable
     // a flag to change the button behavior
     private boolean cameraActive = false;
     // the id of the camera to be used
-    private static int cameraId = 2;
+    private static int cameraId = 0;
     
     private double[] midPoint;
     
-    private boolean weirdRenderActive = false;
+    private boolean weirdRenderActive;
+    private boolean flipActive;
 
     BooleanProperty isImgVisible = new SimpleBooleanProperty(true);
     
@@ -85,20 +76,33 @@ public class Controller implements Initializable
         weirdRenderActive = weirdToggle.isSelected();
     }
     
+    @FXML
+    protected void flipToggleAction(ActionEvent ev)
+    {
+        flipActive = ((JFXToggleButton)ev.getSource()).isSelected();
+    }
+    
+    @FXML
+    protected void increaseCameraID(ActionEvent ev)
+    {
+        cameraId++;
+        cameraIDText.setText(Integer.toString(cameraId));
+    }
+    
+    @FXML
+    protected void decreaseCameraID(ActionEvent ev)
+    {
+        if (cameraId>0) cameraId--;
+        cameraIDText.setText(Integer.toString(cameraId));
+    }
 
-    /**
-     * The action triggered by pushing the button on the GUI
-     *
-     * @param event
-     *            the push button event
-     */
+    
     @FXML
     protected void startCamera(ActionEvent event)
     {
         
         colorButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         
-        app.st.sizeToScene();
         colorText.setFont(new Font("Symbol", 25.0));
         colorText.setText("");
         
@@ -141,6 +145,7 @@ public class Controller implements Initializable
             {
                 // log the error
                 System.err.println("Impossible to open the camera connection...");
+                cambtn.setText("ERROR");
             }
         }
         else
@@ -154,12 +159,7 @@ public class Controller implements Initializable
             this.stopAcquisition();
         }
     }
-
-    /**
-     * Get a frame from the opened video stream (if any)
-     *
-     * @return the {@link Mat} to show
-     */
+    
     private Mat grabFrame()
     {
         // init everything
@@ -216,23 +216,12 @@ public class Controller implements Initializable
             this.capture.release();
         }
     }
-
-    /**
-     * Update the {@link ImageView} in the JavaFX main thread
-     *
-     * @param view
-     *            the {@link ImageView} to update
-     * @param image
-     *            the {@link Image} to show
-     */
+    
     private void updateImageView(ImageView view, Image image)
     {
         Utils.onFXThread(view.imageProperty(), image);
     }
-
-    /**
-     * On application close, stop the acquisition from the camera
-     */
+    
     protected void setClosed()
     {
         this.stopAcquisition();
@@ -253,6 +242,8 @@ public class Controller implements Initializable
     private void process(Mat f)
     {
         Mat gen = new Mat();
+        
+        if (flipActive) Core.flip(f, f, 1);
         
         Imgproc.cvtColor(f, gen, Imgproc.COLOR_BGR2RGB);
         

@@ -1,9 +1,6 @@
 import javafx.application.Application;
-import javafx.beans.property.BooleanProperty;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -24,18 +21,20 @@ public class App extends Application
     @Override
     public void start(Stage s) throws IOException
     {
+
         loader = new FXMLLoader(getClass().getResource("gui.fxml"));
-        root = (BorderPane) loader.load();
+        root = loader.load();
         contr = loader.getController();
         contr.link(this);
         st = s;
         
-        sc = new Scene(root, 600 ,600);
-        s.setMinWidth(600);
-        s.setMinHeight(600);
+        sc = new Scene(root);
+        
+        s.setMinWidth(650);
+        s.setMinHeight(680);
         s.setScene(sc);
-        s.setTitle("ThunderLord/VisionAlpha");
-        s.setResizable(false);
+        s.setTitle("Plasmoxy::ThunderLord - VisionAlpha | by Sebo Petrík");
+        s.setResizable(true);
         s.sizeToScene();
         s.show();
 
