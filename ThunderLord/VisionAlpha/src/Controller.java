@@ -60,7 +60,7 @@ public class Controller implements Initializable
     // a flag to change the button behavior
     private boolean cameraActive = false;
     // the id of the camera to be used
-    private static int cameraId = 0;
+    private static int cameraId = 2;
     
     private double[] midPoint;
     
@@ -82,7 +82,6 @@ public class Controller implements Initializable
     @FXML
     protected void weirdToggleAction(ActionEvent ev)
     {
-        System.out.println(33);
         weirdRenderActive = weirdToggle.isSelected();
     }
     
