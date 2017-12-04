@@ -1,20 +1,242 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
-   <center>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="600.0" style="-fx-background-color: #444;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <top>
       <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-   </center>
-   <bottom>
-      <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   </top>
+   <center>
+      <FlowPane alignment="CENTER" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="cameraButton" onAction="#startCamera" prefHeight="52.0" prefWidth="131.0" text="Start Camera" />
+            <FlowPane alignment="CENTER" prefHeight="258.0" prefWidth="136.0">
+               <children>
+                  <JFXButton fx:id="cameraButton" onAction="#startCamera" prefHeight="52.0" prefWidth="91.0" style="-fx-background-color: #ddd;" text="Start Camera">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="49.0" prefWidth="64.0" style="-fx-background-color: #ddd;">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="47.0" prefWidth="75.0" style="-fx-background-color: #ddd;">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="41.0" prefWidth="63.0" style="-fx-background-color: #ddd;">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </JFXButton>
+               </children>
+            </FlowPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <FlowPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXToggleButton text="FLIP">
+                           <FlowPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </JFXToggleButton>
+                        <JFXToggleButton text="TOGGLE">
+                           <FlowPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </JFXToggleButton>
+                        <JFXToggleButton text="TOGGG">
+                           <FlowPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </JFXToggleButton>
+                     </children>
+                  </FlowPane>
+               </top>
+               <bottom>
+                  <FlowPane alignment="CENTER" prefHeight="30.0" prefWidth="30.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <BorderPane prefHeight="70.0" prefWidth="50.0">
+                           <top>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="+" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </top>
+                           <bottom>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="-" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </bottom>
+                           <center>
+                              <Label text="0" BorderPane.alignment="CENTER" />
+                           </center>
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </BorderPane>
+                        <BorderPane prefHeight="70.0" prefWidth="50.0">
+                           <top>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="+" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </top>
+                           <bottom>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="-" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </bottom>
+                           <center>
+                              <Label text="0" BorderPane.alignment="CENTER" />
+                           </center>
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </BorderPane>
+                        <BorderPane prefHeight="70.0" prefWidth="50.0">
+                           <top>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="+" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </top>
+                           <bottom>
+                              <JFXButton prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #55f;" text="-" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXButton>
+                           </bottom>
+                           <center>
+                              <Label text="0" BorderPane.alignment="CENTER" />
+                           </center>
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </BorderPane>
+                     </children>
+                  </FlowPane>
+               </bottom>
+            </BorderPane>
+            <FlowPane alignment="CENTER" prefHeight="258.0" prefWidth="187.0">
+               <children>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="30.0" prefWidth="240.0">
+                     <left>
+                        <Label text="Slider" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </left>
+                     <center>
+                        <JFXSlider BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </FlowPane>
          </children>
       </FlowPane>
-   </bottom>
+   </center>
 </BorderPane>

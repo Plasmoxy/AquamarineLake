@@ -23,7 +23,7 @@ public class Controller implements Initializable
     
     private VideoCapture cap = new VideoCapture();
     private boolean cameraActive = false;
-    private static int cameraId = 1;
+    private static int cameraId = 0;
 
     private ScheduledExecutorService timer;
     private Runnable frameGrabber = () -> {

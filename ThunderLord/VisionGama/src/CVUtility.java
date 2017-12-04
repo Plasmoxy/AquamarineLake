@@ -8,24 +8,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
 /**
- * Provide general purpose methods for handling OpenCV-JavaFX data conversion.
- * Moreover, expose some "low level" methods for matching few JavaFX behavior.
- *
- * @author <a href="mailto:luigi.derussis@polito.it">Luigi De Russis</a>
- * @author <a href="http://max-z.de">Maximilian Zuleger</a>
- * @version 1.0 (2016-09-17)
- * @since 1.0
- *
+ * Useful methods for OpenCV by Plasmoxy.
+ * Some methods from Luigi De Russis and his tutorial.
  */
+
 public final class CVUtility
 {
-    /**
-     * Convert a Mat object (OpenCV) in the corresponding Image for JavaFX
-     *
-     * @param frame
-     *            the {@link Mat} representing the current frame
-     * @return the {@link Image} to show
-     */
+
+    // convert mat to javafx Image
     public static Image mat2Image(Mat frame)
     {
         try
@@ -38,15 +28,7 @@ public final class CVUtility
         }
     }
 
-    /**
-     * Generic method for putting element running on a non-JavaFX thread on the
-     * JavaFX thread, to properly update the UI
-     *
-     * @param property
-     *            a {@link ObjectProperty}
-     * @param value
-     *            the value to set for the given {@link ObjectProperty}
-     */
+    // generic method which sets property on FX thread ( from non-fx thread )
     public static <T> void onFXThread(final ObjectProperty<T> property, final T value)
     {
         Platform.runLater(() -> {
@@ -54,6 +36,7 @@ public final class CVUtility
         });
     }
     
+    // effective Mat to BufferedImage converter
     private static BufferedImage matToBufferedImage(Mat original)
     {
         // init
@@ -61,15 +44,13 @@ public final class CVUtility
         int width = original.width(), height = original.height(), channels = original.channels();
         byte[] sourcePixels = new byte[width * height * channels];
         original.get(0, 0, sourcePixels);
-
-        if (original.channels() > 1)
-        {
-            image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-        }
-        else
-        {
-            image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
-        }
+        
+        image = new BufferedImage(
+                width,
+                height,
+                original.channels() > 1 ? BufferedImage.TYPE_3BYTE_BGR : BufferedImage.TYPE_BYTE_GRAY
+        );
+        
         final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         System.arraycopy(sourcePixels, 0, targetPixels, 0, sourcePixels.length);
 
