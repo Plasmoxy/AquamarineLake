@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-    <book id="839/24" name="Samo Chalúpka - Mor ho" taker="filipsasala"/>
-    <book id="839/32" name="Janko Kráľ - Skrrrr" taker="sebastianpetrik"/>
-    <book id="839/66" name="Big Shaq - Ting" taker="peterhovanec"/>
-    <book id="839/77" name="Shadap Yacunt - Weird Ass" taker="filipsasala"/>
-    <book id="839/99" name="Public Static - Void Main" taker="filipsasala"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><library>
+    <book id="839/24" name="Samo Chalúpka - Mor ho" random="0.7717685783525051" taker="filipsasala"/>
+    <book id="839/32" name="Janko Kráľ - Skrrrr" random="0.872954331431896" taker="sebastianpetrik"/>
+    <book id="839/66" name="Big Shaq - Ting" random="0.5892576517821534" taker="peterhovanec"/>
+    <book id="839/77" name="Shadap Yacunt - Weird Ass" random="0.627968884979168" taker="filipsasala"/>
+    <book id="839/99" name="Public Static - Void Main" random="0.9922728235721132" taker="filipsasala"/>
 </library>

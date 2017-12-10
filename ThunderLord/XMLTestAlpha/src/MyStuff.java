@@ -1,3 +1,5 @@
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -7,19 +9,37 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class MyStuff
 {
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException
+    public static void main(String[] args)
+            throws IOException, ParserConfigurationException, SAXException, TransformerException
     {
         File file = new File("idk.xml");
 
+        // xml file
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        
         Document doc=  dBuilder.parse(file);
         doc.getDocumentElement().normalize();
+
+        //xml writer
+        DOMSource source = new DOMSource(doc);
+        FileWriter writer = new FileWriter(file);
+        StreamResult result = new StreamResult(writer);
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
 
         NodeList books = doc.getElementsByTagName("book");
         
@@ -35,6 +55,11 @@ public class MyStuff
             System.out.println("author = " + e.getAttribute("author"));
             System.out.println("taker = " + e.getAttribute("taker"));
             System.out.println();
+            
+            e.setAttribute("random", Double.toString(Math.random()));
         }
+        
+        transformer.transform(source, result);
+        
     }
 }
