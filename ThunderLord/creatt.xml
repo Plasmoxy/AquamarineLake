@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database>
+  <books>
+    <book id="600" name="XDDD"/>
+    <book id="663" name="LOL"/>
+  </books>
+  <persons>
+    <person id="sebastianpetrik" name="Sebastián Petrík"/>
+  </persons>
+</database>

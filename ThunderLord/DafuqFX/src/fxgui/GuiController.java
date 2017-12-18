@@ -6,7 +6,4 @@ import javafx.fxml.FXML;
 public class GuiController
 {
     @FXML JFXButton blyat;
-    
-    
-    
 }
