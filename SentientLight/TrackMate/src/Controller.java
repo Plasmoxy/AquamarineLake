@@ -25,7 +25,7 @@ public class Controller
     
     // OpenCV
     
-    private VideoCapture cap = new VideoCapture();
+    private VideoCapture cap;
     private boolean cameraActive = false;
     private static int cameraId = 0;
 
@@ -35,9 +35,23 @@ public class Controller
         CVUtility.onFXThread(imageView.imageProperty(), CVUtility.mat2Image(frame));
     };
     
-    // CUSTOM
+    // OTHER STUFF
     
-    CascadeClassifier faceCascade = new CascadeClassifier();
+    CascadeClassifier faceCascade;
+    private int absoluteFaceSize; // minimal face size
+
+    public void init()
+    {
+        System.out.println("INIT");
+        
+        cap = new VideoCapture();
+        faceCascade = new CascadeClassifier();
+        
+        imageView.setFitWidth(640);
+        imageView.setPreserveRatio(true);
+		
+        faceCascade.load("res/haarcascade_frontalface_alt.xml");
+    }
     
     // Handling methods
     
@@ -111,15 +125,6 @@ public class Controller
     {
         
     }
-    
-    // controller methods
-    
-    public void init()
-	{
-		System.out.println("CONTROLLER INIT");
-		
-		faceCascade.load("res/haarcascade_frontalface_alt.xml");
-	}
     
     protected void close()
     {
