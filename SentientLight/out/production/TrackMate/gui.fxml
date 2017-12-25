@@ -13,9 +13,9 @@
    <bottom>
       <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="cameraButton" onAction="#startCamera" prefHeight="52.0" prefWidth="131.0" text="Start Camera" />
-            <JFXToggleButton fx:id="haarClassifier" onAction="#haarSelected" text="Haar Classifier" />
-            <JFXToggleButton />
+            <JFXButton fx:id="cameraButton" onAction="#startCameraa" prefHeight="52.0" prefWidth="131.0" style="-fx-background-color: #ddd;" text="Start Camera" />
+            <JFXToggleButton fx:id="detectFaceToggle" onAction="#detectFaceAction" text="Detect Face" toggleColor="#e40a77" toggleLineColor="#392ec7" />
+            <JFXToggleButton text="nothing" />
          </children>
       </FlowPane>
    </bottom>

@@ -8,6 +8,7 @@ import org.opencv.core.Mat;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 
+import javax.swing.*;
 import javax.xml.bind.annotation.XmlList;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +22,7 @@ public class Controller
     // NODES
     @FXML JFXButton cameraButton;
     @FXML ImageView imageView;
-    @FXML JFXToggleButton haarToggle;
+    @FXML JFXToggleButton detectFaceToggle;
     
     // OpenCV
     
@@ -39,6 +40,8 @@ public class Controller
     
     CascadeClassifier faceCascade;
     private int absoluteFaceSize; // minimal face size
+    
+    private boolean detectFaceActive;
 
     public void init()
     {
@@ -54,6 +57,12 @@ public class Controller
     }
     
     // Handling methods
+    
+    @FXML
+    protected void detectFaceAction(ActionEvent e) 
+    {
+        detectFaceActive = detectFaceToggle.isSelected();
+    }
     
     @FXML
     protected void startCamera(ActionEvent event)
@@ -78,12 +87,6 @@ public class Controller
             stopAcquisition();
         }
     }
-    
-    @FXML
-	protected void haarSelected(ActionEvent event)
-	{
-		
-	}
     
     // cv methods
     private Mat grabFrame()
@@ -123,7 +126,7 @@ public class Controller
     
     private void process(Mat f)
     {
-        
+        if (detectFaceActive) System.out.println("ASDASD");
     }
     
     protected void close()

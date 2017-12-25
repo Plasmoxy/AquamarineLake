@@ -24,7 +24,7 @@ public class App extends Application
 
         stg.setScene(sc);
         stg.sizeToScene();
-        stg.setTitle("");
+        stg.setTitle("Plasmoxy - SentientLight/TrackMate");
         stg.setMinHeight(stg.getHeight());
         stg.setMinWidth(stg.getWidth());
         stg.show();
