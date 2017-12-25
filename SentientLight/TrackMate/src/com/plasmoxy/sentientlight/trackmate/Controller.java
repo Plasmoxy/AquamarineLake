@@ -1,3 +1,5 @@
+package com.plasmoxy.sentientlight.trackmate;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;

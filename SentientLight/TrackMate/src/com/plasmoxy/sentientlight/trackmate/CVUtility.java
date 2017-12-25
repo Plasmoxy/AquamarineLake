@@ -1,3 +1,5 @@
+package com.plasmoxy.sentientlight.trackmate;
+
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.embed.swing.SwingFXUtils;
