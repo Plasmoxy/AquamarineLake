@@ -15,6 +15,7 @@ public class Faktorial
 
 	public static void main(String[] args)
 	{
-		System.out.println(f(5));
+		final int t = 5;
+		System.out.println(f(t)); 
 	}
 }
