@@ -18,16 +18,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Controller
-{
-    
+public class Controller {
+
     // NODES
-    @FXML JFXButton cameraButton;
-    @FXML ImageView imageView;
-    @FXML JFXToggleButton detectFaceToggle;
-    
+    @FXML
+    JFXButton cameraButton;
+    @FXML
+    ImageView imageView;
+    @FXML
+    JFXToggleButton detectFaceToggle;
+
     // OpenCV
-    
+
     private VideoCapture cap;
     private boolean cameraActive = false;
     private static int cameraId = 0;
@@ -37,47 +39,42 @@ public class Controller
         Mat frame = grabFrame();
         CVUtility.onFXThread(imageView.imageProperty(), CVUtility.mat2Image(frame));
     };
-    
+
     // OTHER STUFF
-    
+
     CascadeClassifier faceCascade;
     private int absoluteFaceSize; // minimal face size
-    
+
     private boolean detectFaceActive;
 
-    public void init()
-    {
+    public void init() {
         System.out.println("INIT");
-        
+
         cap = new VideoCapture();
         faceCascade = new CascadeClassifier();
-        
+
         imageView.setFitWidth(640);
         imageView.setPreserveRatio(true);
-		
+
         faceCascade.load("res/haarcascade_frontalface_alt.xml");
     }
-    
+
     // Handling methods
-    
+
     @FXML
-    protected void detectFaceAction(ActionEvent e) 
-    {
+    protected void detectFaceAction(ActionEvent e) {
         detectFaceActive = detectFaceToggle.isSelected();
     }
-    
+
     @FXML
-    protected void startCamera(ActionEvent event)
-    {
-        if (!cameraActive)
-        {
+    protected void startCamera(ActionEvent event) {
+        if (!cameraActive) {
             cap.open(cameraId);
-            if (cap.isOpened())
-            {
+            if (cap.isOpened()) {
                 cameraActive = true;
                 timer = Executors.newSingleThreadScheduledExecutor();
                 timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
-                
+
                 cameraButton.setText("Stop Camera");
             } else {
                 System.err.println("Cant open camera");
@@ -89,51 +86,43 @@ public class Controller
             stopAcquisition();
         }
     }
-    
+
     // cv methods
-    private Mat grabFrame()
-    {
+    private Mat grabFrame() {
         Mat frame = new Mat(); // empty mat
-        if (cap.isOpened())
-        {
-            try
-            {
+        if (cap.isOpened()) {
+            try {
                 cap.read(frame);
                 if (!frame.empty()) process(frame);
-            }
-            catch(Exception ex)
-            {
+            } catch (Exception ex) {
                 System.err.println("Error during image processing.");
             }
         }
-        
+
         return frame;
     }
-    
-    private void stopAcquisition()
-    {
-        if (timer!=null && !timer.isShutdown())
-        {
-            try
-            {
+
+    private void stopAcquisition() {
+        if (timer != null && !timer.isShutdown()) {
+            try {
                 timer.shutdown();
                 timer.awaitTermination(33, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {e.printStackTrace();}
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        
+
         if (cap.isOpened()) cap.release();
     }
-    
+
     // process the frame here
-    
-    private void process(Mat f)
-    {
+
+    private void process(Mat f) {
         if (detectFaceActive) System.out.println("ASDASD");
     }
-    
-    protected void close()
-    {
+
+    protected void close() {
         stopAcquisition();
     }
-    
+
 }
