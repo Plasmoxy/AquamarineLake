@@ -2,14 +2,15 @@
 
 class Printer
 {
-  fun print(t : String)
-  {
-    println(t)
+  var print = {
+    println("hello")
   }
 }
 
 fun main(args: Array<String>)
 {
   var a = Add() // use java class
-  println(a.add(b,b))
+  println(a.add(4,4))
+  var p = Printer()
+  p.print()
 }
