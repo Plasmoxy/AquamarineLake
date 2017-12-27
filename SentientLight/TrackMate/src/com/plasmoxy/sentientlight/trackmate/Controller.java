@@ -55,7 +55,7 @@ public class Controller {
 
         imageView.setFitWidth(640);
         imageView.setPreserveRatio(true);
-
+        
         faceCascade.load("res/haarcascade_frontalface_alt.xml");
     }
 
