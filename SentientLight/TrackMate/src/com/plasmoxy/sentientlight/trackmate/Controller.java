@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Controller {
 
-    // NODES
+    // FIELDS --- NODES ---
     @FXML
     JFXButton cameraButton;
     @FXML
@@ -28,7 +28,7 @@ public class Controller {
     @FXML
     JFXToggleButton detectFaceToggle;
 
-    // OpenCV
+    // FIELDS --- OpenCV ---
 
     private VideoCapture cap;
     private boolean cameraActive = false;
@@ -40,7 +40,7 @@ public class Controller {
         CVUtility.onFXThread(imageView.imageProperty(), CVUtility.mat2Image(frame));
     };
 
-    // OTHER STUFF
+    // FIELDS  --- OTHER STUFF ---
 
     CascadeClassifier faceCascade;
     private int absoluteFaceSize; // minimal face size
@@ -59,7 +59,7 @@ public class Controller {
         faceCascade.load("res/haarcascade_frontalface_alt.xml");
     }
 
-    // Handling methods
+    // METHODS --- Handling ---
 
     @FXML
     protected void detectFaceAction(ActionEvent e) {
@@ -87,7 +87,8 @@ public class Controller {
         }
     }
 
-    // cv methods
+    // METHODS -- CV --
+
     private Mat grabFrame() {
         Mat frame = new Mat(); // empty mat
         if (cap.isOpened()) {
@@ -115,14 +116,9 @@ public class Controller {
         if (cap.isOpened()) cap.release();
     }
 
-    // process the frame here
-
+    // process the frame
     private void process(Mat f) {
         if (detectFaceActive) System.out.println("ASDASD");
-    }
-
-    protected void close() {
-        stopAcquisition();
     }
 
 }
