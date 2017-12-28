@@ -47,6 +47,12 @@ public class Controller {
 
     private boolean detectFaceActive;
 
+    // METHODS --- CONTROLLER METHODS ---
+
+    public void close() {
+        stopAcquisition();
+    }
+
     public void init() {
         System.out.println("INIT");
 
