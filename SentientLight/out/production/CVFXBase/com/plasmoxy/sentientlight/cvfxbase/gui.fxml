@@ -19,14 +19,14 @@
          <right>
             <BorderPane prefHeight="500.0" prefWidth="340.0" style="-fx-background-color: #aaa;" BorderPane.alignment="CENTER">
                <top>
-                  <ImageView fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                  <ImageView fx:id="imageViewAlpha" fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </BorderPane.margin>
                   </ImageView>
                </top>
                <bottom>
-                  <ImageView fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                  <ImageView fx:id="imageViewBeta" fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </BorderPane.margin>

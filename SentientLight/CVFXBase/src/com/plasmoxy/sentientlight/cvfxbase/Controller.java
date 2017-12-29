@@ -11,6 +11,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * Controller class for CVFXBase by Plasmoxy
+ */
+
 public class Controller { // control class for gui.fxml
 
     // FIELDS -- Nodes --
@@ -23,24 +28,32 @@ public class Controller { // control class for gui.fxml
 
     private VideoCapture cap;
     private boolean cameraActive = false;
-    private static int cameraId = 0; // ID OF THE CAMERA
+    private int cameraId = 0; // ID OF THE CAMERA
+
+    private boolean renderMainActive = true, renderAlphaActive, renderBetaActive;
+
+    private Mat frame, frameAlpha, frameBeta; // frame fields
 
     // FIELDS -- Render --
 
     private ScheduledExecutorService timer;
     private Runnable frameRenderer = () -> {
-        Mat frame = grabFrame(), frameAlpha = null, frameBeta = null;
+        frame = grabFrame(); // grab frame from camera
 
-        // if there is a frame to process&show ( check if Mat isn't empty and if there exists object
-        if (!frame.empty() && frame!=null) {
+        // if there is a frame to process&show
+        if (frame!=null && !frame.empty()) {
 
-            process(frame, frameAlpha, frameBeta);
-            CVUtility.onFXThread(imageView.imageProperty(), CVUtility.mat2Image(frame));
+            // process frames and update views
+            process();
+            if ( renderMainActive ) CVUtility.setProperty(imageView.imageProperty(), CVUtility.mat2Image(frame));
 
-            if (!frameAlpha.empty() && frameAlpha!=null)
-                CVUtility.onFXThread(imageViewAlpha.imageProperty(), CVUtility.mat2Image(frameAlpha));
-            if (!frameBeta.empty() && frameBeta!=null)
-                CVUtility.onFXThread(imageViewBeta.imageProperty(), CVUtility.mat2Image(frameBeta));
+            // update alpha and beta views
+            if (renderAlphaActive && frameAlpha != null && !frameAlpha.empty())
+                CVUtility.setProperty(imageViewAlpha.imageProperty(), CVUtility.mat2Image(frameAlpha));
+
+            if (renderBetaActive && frameBeta != null && !frameAlpha.empty())
+                CVUtility.setProperty(imageViewBeta.imageProperty(), CVUtility.mat2Image(frameBeta));
+
         }
 
 
@@ -55,7 +68,10 @@ public class Controller { // control class for gui.fxml
         // fix imageViews so they don't resize
         imageView.setFitWidth(640);
         imageView.setPreserveRatio(true);
-
+        imageViewAlpha.setFitWidth(320);
+        imageViewAlpha.setPreserveRatio(true);
+        imageViewBeta.setFitWidth(320);
+        imageViewBeta.setPreserveRatio(true);
 
     }
 
@@ -121,7 +137,9 @@ public class Controller { // control class for gui.fxml
 
     // process the frame here
     // frames - imageView, imageViewAlpha, imageViewBeta
-    private void process(Mat f, Mat alpha, Mat beta) {
+    private void process() {
+
+
 
     }
 

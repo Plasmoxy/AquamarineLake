@@ -9,7 +9,7 @@ import org.opencv.core.Core;
 
 import java.io.IOException;
 
-/*
+/**
  * CVFXBase OpenCV Base in JavaFX by Plasmoxy
  */
 

@@ -26,7 +26,7 @@ public final class CVUtility {
     }
 
     // generic method which sets property on FX thread ( from non-fx thread )
-    public static <T> void onFXThread(final ObjectProperty<T> property, final T value) {
+    public static <T> void setProperty(final ObjectProperty<T> property, final T value) {
         Platform.runLater(() -> {
             property.set(value);
         });
