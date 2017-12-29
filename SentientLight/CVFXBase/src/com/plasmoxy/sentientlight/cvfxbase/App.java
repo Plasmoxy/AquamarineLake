@@ -34,7 +34,7 @@ public class App extends Application
 
         stg.setScene(sc);
         stg.sizeToScene();
-        stg.setTitle("");
+        stg.setTitle("Plasmoxy - CVFXBase");
 
         stg.setOnCloseRequest( event ->
         {
@@ -67,5 +67,7 @@ public class App extends Application
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // load opencv
         System.out.println("[main] Launching App");
         launch(args); // launch fx
+
+        System.out.println("[main] EXIT");
     }
 }
